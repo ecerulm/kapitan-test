@@ -1,0 +1,18 @@
+parameters:
+  target_name: ${_reclass_:name:short}
+  kapitan:
+    dependencies:
+    - type: git
+      source: https://github.com/kapicorp/generators.git
+      ref: main
+      subdir: kubernetes
+      output_path: system/generators/kubernetes
+    - type: git
+      source: https://github.com/kapicorp/generators.git
+      ref: main
+      subdir: lib/
+      output_path: system/lib/
+    compile: []
+    vars:
+      target: ${target_name}
+
