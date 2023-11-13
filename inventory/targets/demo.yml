@@ -6,13 +6,30 @@ parameters:
       source: https://github.com/kapicorp/generators.git
       ref: main
       subdir: kubernetes
-      output_path: system/generators/kubernetes
+      output_path: lib/kubernetes
     - type: git
       source: https://github.com/kapicorp/generators.git
       ref: main
       subdir: lib/
-      output_path: system/lib/
-    compile: []
+      output_path: lib/
     vars:
       target: ${target_name}
-
+    compile:
+    - output_path: manifests
+      input_type: kadet
+      output_type: yml
+      input_paths:
+        - lib/kubernetes
+  generators:
+    kubernetes:
+      namespace:
+        name:
+          name: mynamespace
+    manifest:
+      default_config:
+        namespace: mynamespace
+        type: deployment
+        service_account:
+          create: false
+        annotations:
+          "manifests.kapicorp.com/generated": "true"
